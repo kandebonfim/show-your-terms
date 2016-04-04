@@ -1,5 +1,17 @@
 {
   "name": "show-your-terms",
+  "authors": [
+    "Kande Bonfim <kandebonfim@gmail.com>"
+  ],
+  "description": "Simple demos of your applications' terminal commands.",
+  "main": "show-your-terms.js",
+  "moduleType": [],
+  "keywords": [
+    "terminal",
+    "shell",
+    "bash",
+    "commands"
+  ],
   "version": "0.1.0",
   "devDependencies": {
     "grunt": "^0.4.5",
