@@ -8,25 +8,29 @@ class ShowYourTerms
       @outputGenerator type, content
 
   outputGenerator: (type, content) ->
+    type_split = type.split(':')
+    type = type_split[0]
+    classnames = type_split.slice(1,type_split.lenght).join(' ')
     switch type
       when "command"
-        console.log type
+        @outputLine content, classnames
       when "line"
-        @outputLine content
+        @outputLine content, classnames
 
-  outputLine: (content) ->
+  outputLine: (content, classnames) ->
     current = document.createElement("div")
+    current.setAttribute("class", classnames)
     text = document.createTextNode(content)
     current.appendChild(text)
     @container.appendChild(current)
 
-# # Helpers
-# delay = (ms, func) -> setTimeout func, ms
+# Helpers
+delay = (ms, func) -> setTimeout func, ms
 
-# # Demo
-# terminalDrops = {
-#   "command": "hello, show your terms!",
-#   "line": "hello, motherfocka!"
-# }
+# Demo
+terminalDrops = {
+  "command": "hello, show your terms!",
+  "line:yellow:bold": "hello, motherfocka!"
+}
 
-# delay 200, -> new ShowYourTerms('.terminal', terminalDrops)
+delay 200, -> new ShowYourTerms('.terminal', terminalDrops)
