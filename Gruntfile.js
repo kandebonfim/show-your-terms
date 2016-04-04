@@ -16,12 +16,22 @@ module.exports = function(grunt) {
         src: 'lib/<%= pkg.name %>.js',
         dest: 'lib/<%= pkg.name %>.min.js'
       }
-    }
+    },
+    watch: {
+      scripts: {
+        files: ['src/*.coffee'],
+        tasks: ['coffee', 'uglify'],
+        options: {
+          spawn: false,
+        },
+      },
+    },
   });
 
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
   grunt.registerTask('default', ['coffee', 'uglify']);
