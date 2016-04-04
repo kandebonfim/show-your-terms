@@ -1,6 +1,6 @@
 class ShowYourTerms
   constructor: (@container, @content) ->
-    @container = document.querySelectorAll(@container)
+    @container = document.querySelector(@container)
     @outputsParser()
 
   outputsParser: ->
@@ -8,11 +8,25 @@ class ShowYourTerms
       @outputGenerator type, content
 
   outputGenerator: (type, content) ->
-    console.log type, content
+    switch type
+      when "command"
+        console.log type
+      when "line"
+        @outputLine content
 
-terminalDrops = {
-  "command": "hello, show your terms!",
-  "line": "hello, motherfocka!"
-}
+  outputLine: (content) ->
+    current = document.createElement("div")
+    text = document.createTextNode(content)
+    current.appendChild(text)
+    @container.appendChild(current)
 
-new ShowYourTerms('.terminal', terminalDrops)
+# # Helpers
+# delay = (ms, func) -> setTimeout func, ms
+
+# # Demo
+# terminalDrops = {
+#   "command": "hello, show your terms!",
+#   "line": "hello, motherfocka!"
+# }
+
+# delay 200, -> new ShowYourTerms('.terminal', terminalDrops)
