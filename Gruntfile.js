@@ -17,10 +17,20 @@ module.exports = function(grunt) {
         dest: 'lib/<%= pkg.name %>.min.js'
       }
     },
+    sass: {
+      dist: {
+        options: {
+          style: 'compressed'
+        },
+        files: {
+          'stylesheets/<%= pkg.name %>.css': 'src/<%= pkg.name %>.sass'
+        }
+      }
+    },
     watch: {
       scripts: {
-        files: ['src/*.coffee'],
-        tasks: ['coffee', 'uglify'],
+        files: ['src/*.coffee', 'src/*.sass'],
+        tasks: ['coffee', 'sass', 'uglify'],
         options: {
           spawn: false,
         },
@@ -32,8 +42,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-sass');
 
   // Default task(s).
-  grunt.registerTask('default', ['coffee', 'uglify']);
+  grunt.registerTask('default', ['coffee', 'sass', 'uglify']);
 
 };
