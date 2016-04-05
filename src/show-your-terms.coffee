@@ -2,6 +2,8 @@ class ShowYourTerms
   constructor: (@container, @content) ->
     @container = document.querySelector(@container)
     @outputIndex = 0
+
+  start: ->
     @outputGenerator(@content[@outputIndex])
 
   outputGenerator: (output) ->
@@ -52,8 +54,10 @@ delay = (ms, func) => setTimeout func, ms
 # Demo
 terminalDrops = [
   ["command", "hello, show your terms!"],
-  ["line:yellow:bold", "hello, motherfocka!"]
+  ["line:yellow:bold", "hello, motherfocka!"],
   ["line:yellow:bold", "oi, teste!"]
 ]
 
-delay 200, => new ShowYourTerms('.terminal', terminalDrops)
+delay 100, =>
+  syt = new ShowYourTerms('.terminal', terminalDrops)
+  syt.start()
