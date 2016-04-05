@@ -1,36 +1,59 @@
 class ShowYourTerms
   constructor: (@container, @content) ->
     @container = document.querySelector(@container)
-    @outputsParser()
+    @outputIndex = 0
+    @outputGenerator(@content[@outputIndex])
 
-  outputsParser: ->
-    for type, content of @content
-      @outputGenerator type, content
-
-  outputGenerator: (type, content) ->
-    type_split = type.split(':')
+  outputGenerator: (output) ->
+    type_split = output[0].split(':')
     type = type_split[0]
+    content = output[1]
     classnames = type_split.slice(1,type_split.lenght).join(' ')
+
+    currentLine = document.createElement("div")
+
+    if classnames
+      currentLine.setAttribute("class", classnames)
+
     switch type
       when "command"
-        @outputLine content, classnames
-      when "line"
-        @outputLine content, classnames
+        characters = content.split('')
 
-  outputLine: (content, classnames) ->
-    current = document.createElement("div")
-    current.setAttribute("class", classnames)
-    text = document.createTextNode(content)
-    current.appendChild(text)
-    @container.appendChild(current)
+        counter = 0
+        interval = setInterval(( =>
+          console.log characters[counter]
+
+          text = document.createTextNode(characters[counter])
+          currentLine.appendChild(text)
+          @container.appendChild(currentLine)
+
+          counter++
+          if counter == characters.length
+            @callNextOutput(@outputIndex)
+            clearInterval interval
+        ), 100)
+
+      when "line"
+        console.log content
+        text = document.createTextNode(content)
+        currentLine.appendChild(text)
+        @container.appendChild(currentLine)
+
+        @callNextOutput(@outputIndex)
+
+  callNextOutput: (index) ->
+    @outputIndex = @outputIndex + 1
+    if @content[@outputIndex]
+      @outputGenerator(@content[@outputIndex])
 
 # Helpers
-delay = (ms, func) -> setTimeout func, ms
+delay = (ms, func) => setTimeout func, ms
 
 # Demo
-terminalDrops = {
-  "command": "hello, show your terms!",
-  "line:yellow:bold": "hello, motherfocka!"
-}
+terminalDrops = [
+  ["command", "hello, show your terms!"],
+  ["line:yellow:bold", "hello, motherfocka!"]
+  ["line:yellow:bold", "oi, teste!"]
+]
 
-delay 200, -> new ShowYourTerms('.terminal', terminalDrops)
+delay 200, => new ShowYourTerms('.terminal', terminalDrops)
