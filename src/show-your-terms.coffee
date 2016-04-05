@@ -1,21 +1,35 @@
-class ShowYourTerms
+class @ShowYourTerms
   constructor: (@container, @content) ->
     @container = document.querySelector(@container)
     @outputIndex = 0
+    @content = []
+
+  addCommand: (content, options = {}) ->
+    @content.push ["command", content, options]
+    return self
+
+  addLine: (content, options = {}) ->
+    @content.push ["line", content, options]
 
   start: ->
     @outputGenerator(@content[@outputIndex])
 
+  callNextOutput: (index, delay = 800) ->
+    @outputIndex = @outputIndex + 1
+    if @content[@outputIndex]
+      waitForIt delay, => @outputGenerator(@content[@outputIndex])
+    else
+      @outputIndex = 0
+
   outputGenerator: (output) ->
-    type_split = output[0].split(':')
-    type = type_split[0]
+    type = output[0]
     content = output[1]
-    classnames = type_split.slice(1,type_split.lenght).join(' ')
+    options = output[2]
 
     currentLine = document.createElement("div")
 
-    if classnames
-      currentLine.setAttribute("class", classnames)
+    if options.classnames
+      currentLine.setAttribute("class", options.classnames)
 
     switch type
       when "command"
@@ -23,41 +37,23 @@ class ShowYourTerms
 
         counter = 0
         interval = setInterval(( =>
-          console.log characters[counter]
-
           text = document.createTextNode(characters[counter])
           currentLine.appendChild(text)
           @container.appendChild(currentLine)
 
           counter++
+
           if counter == characters.length
-            @callNextOutput(@outputIndex)
+            @callNextOutput(@outputIndex, options.delay)
             clearInterval interval
-        ), 100)
+        ), options.speed)
 
       when "line"
-        console.log content
         text = document.createTextNode(content)
         currentLine.appendChild(text)
         @container.appendChild(currentLine)
 
-        @callNextOutput(@outputIndex)
-
-  callNextOutput: (index) ->
-    @outputIndex = @outputIndex + 1
-    if @content[@outputIndex]
-      @outputGenerator(@content[@outputIndex])
+        @callNextOutput(@outputIndex, options.delay)
 
 # Helpers
-delay = (ms, func) => setTimeout func, ms
-
-# Demo
-terminalDrops = [
-  ["command", "hello, show your terms!"],
-  ["line:yellow:bold", "hello, motherfocka!"],
-  ["line:yellow:bold", "oi, teste!"]
-]
-
-delay 100, =>
-  syt = new ShowYourTerms('.terminal', terminalDrops)
-  syt.start()
+waitForIt = (ms, func) => setTimeout func, ms
