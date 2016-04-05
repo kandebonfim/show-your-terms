@@ -5,6 +5,7 @@ $term-color-red: #EB5E56
 $term-color-yellow: #F7BF33
 $term-color-green: #69CA42
 $term-color-blue: #4A90E2
+$term-color-grey: rgba(white, .6)
 
 $term-header-height: 26px
 $term-header-buttons-size: $term-header-height * .4
@@ -56,3 +57,16 @@ $term-border-radius: 6px
 
   .blue
     color: $term-color-blue
+
+  .grey
+    color: $term-color-grey
+
+  .command
+    &:before
+      content: '$ '
+      opacity: .7
+
+  .type
+    &:before
+      content: '>> '
+      opacity: .7
