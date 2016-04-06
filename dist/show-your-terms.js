@@ -51,8 +51,8 @@
       content = output[1];
       options = output[2];
       currentLine = document.createElement("div");
-      if (options.classnames) {
-        currentLine.setAttribute("class", options.classnames);
+      if (options.styles) {
+        currentLine.setAttribute("class", options.styles);
       }
       switch (type) {
         case "command":

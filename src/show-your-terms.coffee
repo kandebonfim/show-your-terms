@@ -28,8 +28,8 @@ class @ShowYourTerms
 
     currentLine = document.createElement("div")
 
-    if options.style
-      currentLine.setAttribute("class", options.style)
+    if options.styles
+      currentLine.setAttribute("class", options.styles)
 
     switch type
       when "command"
