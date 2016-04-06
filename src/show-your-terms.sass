@@ -66,7 +66,21 @@ $term-border-radius: 6px
       content: '$ '
       opacity: .7
 
+  .command.active:after
+    content: '|'
+    animation: showyourterms_blinker 1s linear infinite
+
   .type
     &:before
       content: '>> '
       opacity: .7
+
+  .blink
+    animation: showyourterms_blinker 1s linear infinite
+
+@keyframes showyourterms_blinker
+  0%, 50%
+    opacity: 0
+  51%, 100%
+    opacity: 1
+

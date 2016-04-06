@@ -54,6 +54,7 @@
       if (options.styles) {
         currentLine.setAttribute("class", options.styles);
       }
+      currentLine.className += " active";
       switch (type) {
         case "command":
           characters = content.split('');
@@ -66,6 +67,7 @@
               _this.container.appendChild(currentLine);
               counter++;
               if (counter === characters.length) {
+                _this.removeClass(currentLine, 'active');
                 _this.callNextOutput(_this.outputIndex, options.delay);
                 return clearInterval(interval);
               }
@@ -75,8 +77,13 @@
           text = document.createTextNode(content);
           currentLine.appendChild(text);
           this.container.appendChild(currentLine);
+          this.removeClass(currentLine, 'active');
           return this.callNextOutput(this.outputIndex, options.delay);
       }
+    };
+
+    ShowYourTerms.prototype.removeClass = function(el, classname) {
+      return el.className = el.className.replace(classname, '');
     };
 
     return ShowYourTerms;

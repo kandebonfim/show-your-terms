@@ -31,6 +31,8 @@ class @ShowYourTerms
     if options.styles
       currentLine.setAttribute("class", options.styles)
 
+    currentLine.className += " active"
+
     switch type
       when "command"
         characters = content.split('')
@@ -44,6 +46,7 @@ class @ShowYourTerms
           counter++
 
           if counter == characters.length
+            @removeClass(currentLine, 'active')
             @callNextOutput(@outputIndex, options.delay)
             clearInterval interval
         ), options.speed)
@@ -53,7 +56,11 @@ class @ShowYourTerms
         currentLine.appendChild(text)
         @container.appendChild(currentLine)
 
+        @removeClass(currentLine, 'active')
         @callNextOutput(@outputIndex, options.delay)
+
+  removeClass: (el, classname) ->
+    el.className = el.className.replace(classname,'')
 
 # Helpers
 waitForIt = (ms, func) => setTimeout func, ms
