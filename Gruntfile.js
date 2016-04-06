@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     coffee: {
       compile: {
-        files: {'lib/<%= pkg.name %>.js': 'src/<%= pkg.name %>.coffee'}
+        files: {'dist/<%= pkg.name %>.js': 'src/<%= pkg.name %>.coffee'}
       },
     },
     uglify: {
@@ -13,8 +13,8 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> - <%= pkg.authors %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'lib/<%= pkg.name %>.js',
-        dest: 'lib/<%= pkg.name %>.min.js'
+        src: 'dist/<%= pkg.name %>.js',
+        dest: 'dist/<%= pkg.name %>.min.js'
       }
     },
     sass: {
@@ -23,7 +23,7 @@ module.exports = function(grunt) {
           style: 'compressed'
         },
         files: {
-          'stylesheets/<%= pkg.name %>.css': 'src/<%= pkg.name %>.sass'
+          'dist/<%= pkg.name %>.min.css': 'src/<%= pkg.name %>.sass'
         }
       }
     },
