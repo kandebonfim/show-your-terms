@@ -9,13 +9,13 @@ class @ShowYourTerms
 
   declarativeBuilder: ->
     for element in @container.children
-      switch element.getAttribute('data-action')
-        when "command"
-          @addCommand element.innerText, {styles: element.classList, delay: element.getAttribute('data-delay')}
-        when "line"
-          @addLine element.innerText, {styles: element.classList, delay: element.getAttribute('data-delay')}
+      if element.getAttribute('data-action') == "command"
+        @addCommand element.innerText, {styles: element.classList, delay: element.getAttribute('data-delay')}
+      else
+        @addLine element.innerText, {styles: element.classList, delay: element.getAttribute('data-delay')}
     @container.style.height = window.getComputedStyle(@container, null).getPropertyValue("height")
     @container.innerHTML = ''
+    @start()
 
   addCommand: (content, options = {}) ->
     @content.push ["command", content, options]
@@ -45,38 +45,36 @@ class @ShowYourTerms
 
     currentLine = document.createElement("div")
 
-    if options.styles
-      currentLine.setAttribute("class", options.styles)
+    if options.styles then currentLine.setAttribute("class", options.styles)
 
     if options.speed then speed = options.speed else speed = 100
 
     currentLine.className += " active"
 
-    switch type
-      when "command"
-        characters = content.split('')
+    if type == "command"
+      characters = content.split('')
 
-        counter = 0
-        interval = setInterval(( =>
-          text = document.createTextNode(characters[counter])
-          currentLine.appendChild(text)
-          @container.appendChild(currentLine)
-
-          counter++
-
-          if counter == characters.length
-            @removeClass(currentLine, 'active')
-            @callNextOutput(options.delay)
-            clearInterval interval
-        ), speed)
-
-      when "line"
-        text = document.createTextNode(content)
+      counter = 0
+      interval = setInterval(( =>
+        text = document.createTextNode(characters[counter])
         currentLine.appendChild(text)
         @container.appendChild(currentLine)
 
-        @removeClass(currentLine, 'active')
-        @callNextOutput(options.delay)
+        counter++
+
+        if counter == characters.length
+          @removeClass(currentLine, 'active')
+          @callNextOutput(options.delay)
+          clearInterval interval
+      ), speed)
+
+    else
+      text = document.createTextNode(content)
+      currentLine.appendChild(text)
+      @container.appendChild(currentLine)
+
+      @removeClass(currentLine, 'active')
+      @callNextOutput(options.delay)
 
   removeClass: (el, classname) ->
     el.className = el.className.replace(classname,'')

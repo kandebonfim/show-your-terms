@@ -20,22 +20,21 @@
       ref = this.container.children;
       for (i = 0, len = ref.length; i < len; i++) {
         element = ref[i];
-        switch (element.getAttribute('data-action')) {
-          case "command":
-            this.addCommand(element.innerText, {
-              styles: element.classList,
-              delay: element.getAttribute('data-delay')
-            });
-            break;
-          case "line":
-            this.addLine(element.innerText, {
-              styles: element.classList,
-              delay: element.getAttribute('data-delay')
-            });
+        if (element.getAttribute('data-action') === "command") {
+          this.addCommand(element.innerText, {
+            styles: element.classList,
+            delay: element.getAttribute('data-delay')
+          });
+        } else {
+          this.addLine(element.innerText, {
+            styles: element.classList,
+            delay: element.getAttribute('data-delay')
+          });
         }
       }
       this.container.style.height = window.getComputedStyle(this.container, null).getPropertyValue("height");
-      return this.container.innerHTML = '';
+      this.container.innerHTML = '';
+      return this.start();
     };
 
     ShowYourTerms.prototype.addCommand = function(content, options) {
@@ -96,30 +95,29 @@
         speed = 100;
       }
       currentLine.className += " active";
-      switch (type) {
-        case "command":
-          characters = content.split('');
-          counter = 0;
-          return interval = setInterval(((function(_this) {
-            return function() {
-              var text;
-              text = document.createTextNode(characters[counter]);
-              currentLine.appendChild(text);
-              _this.container.appendChild(currentLine);
-              counter++;
-              if (counter === characters.length) {
-                _this.removeClass(currentLine, 'active');
-                _this.callNextOutput(options.delay);
-                return clearInterval(interval);
-              }
-            };
-          })(this)), speed);
-        case "line":
-          text = document.createTextNode(content);
-          currentLine.appendChild(text);
-          this.container.appendChild(currentLine);
-          this.removeClass(currentLine, 'active');
-          return this.callNextOutput(options.delay);
+      if (type === "command") {
+        characters = content.split('');
+        counter = 0;
+        return interval = setInterval(((function(_this) {
+          return function() {
+            var text;
+            text = document.createTextNode(characters[counter]);
+            currentLine.appendChild(text);
+            _this.container.appendChild(currentLine);
+            counter++;
+            if (counter === characters.length) {
+              _this.removeClass(currentLine, 'active');
+              _this.callNextOutput(options.delay);
+              return clearInterval(interval);
+            }
+          };
+        })(this)), speed);
+      } else {
+        text = document.createTextNode(content);
+        currentLine.appendChild(text);
+        this.container.appendChild(currentLine);
+        this.removeClass(currentLine, 'active');
+        return this.callNextOutput(options.delay);
       }
     };
 
