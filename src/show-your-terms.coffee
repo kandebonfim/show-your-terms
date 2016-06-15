@@ -13,7 +13,7 @@ class @ShowYourTerms
   start: ->
     @outputGenerator(@content[@outputIndex])
 
-  callNextOutput: (index, delay = 800) ->
+  callNextOutput: (delay = 800) ->
     @outputIndex = @outputIndex + 1
     if @content[@outputIndex]
       waitForIt delay, => @outputGenerator(@content[@outputIndex])
@@ -52,7 +52,7 @@ class @ShowYourTerms
 
           if counter == characters.length
             @removeClass(currentLine, 'active')
-            @callNextOutput(@outputIndex, options.delay)
+            @callNextOutput(options.delay)
             clearInterval interval
         ), speed)
 
@@ -62,7 +62,7 @@ class @ShowYourTerms
         @container.appendChild(currentLine)
 
         @removeClass(currentLine, 'active')
-        @callNextOutput(@outputIndex, options.delay)
+        @callNextOutput(options.delay)
 
   removeClass: (el, classname) ->
     el.className = el.className.replace(classname,'')

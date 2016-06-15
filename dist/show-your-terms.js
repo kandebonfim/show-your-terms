@@ -28,7 +28,7 @@
       return this.outputGenerator(this.content[this.outputIndex]);
     };
 
-    ShowYourTerms.prototype.callNextOutput = function(index, delay) {
+    ShowYourTerms.prototype.callNextOutput = function(delay) {
       if (delay == null) {
         delay = 800;
       }
@@ -53,13 +53,18 @@
     };
 
     ShowYourTerms.prototype.outputGenerator = function(output) {
-      var characters, content, counter, currentLine, interval, options, text, type;
+      var characters, content, counter, currentLine, interval, options, speed, text, type;
       type = output[0];
       content = output[1];
       options = output[2];
       currentLine = document.createElement("div");
       if (options.styles) {
         currentLine.setAttribute("class", options.styles);
+      }
+      if (options.speed) {
+        speed = options.speed;
+      } else {
+        speed = 100;
       }
       currentLine.className += " active";
       switch (type) {
@@ -75,17 +80,17 @@
               counter++;
               if (counter === characters.length) {
                 _this.removeClass(currentLine, 'active');
-                _this.callNextOutput(_this.outputIndex, options.delay);
+                _this.callNextOutput(options.delay);
                 return clearInterval(interval);
               }
             };
-          })(this)), options.speed);
+          })(this)), speed);
         case "line":
           text = document.createTextNode(content);
           currentLine.appendChild(text);
           this.container.appendChild(currentLine);
           this.removeClass(currentLine, 'active');
-          return this.callNextOutput(this.outputIndex, options.delay);
+          return this.callNextOutput(options.delay);
       }
     };
 
