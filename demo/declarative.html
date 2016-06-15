@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo - Show your terms</title>
+  <script src="../dist/show-your-terms.js"></script>
+  <link rel="stylesheet" href="../dist/show-your-terms.min.css">
+</head>
+<body>
+  <div class="showyourterms term1">
+    <div class="command" data-action="command">Hello, show your terms!</div>
+    <div class="line yellow" data-action="command">hi, motherfocka!</div>
+    <div class="command" data-action="command">What is your name?</div>
+    <div class="line yellow" data-action="command">My name is Terms, Show Your Terms.</div>
+  </div>
+
+  <script>
+    example = new ShowYourTerms('.term1')
+    example.start()
+  </script>
+</body>
+</html>
