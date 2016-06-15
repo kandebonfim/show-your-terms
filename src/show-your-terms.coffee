@@ -1,6 +1,5 @@
 class @ShowYourTerms
-  constructor: (@container, @content) ->
-    @container = document.querySelector(@container)
+  constructor: (@container, @replay = true) ->
     @outputIndex = 0
     @content = []
 
@@ -19,7 +18,11 @@ class @ShowYourTerms
     if @content[@outputIndex]
       waitForIt delay, => @outputGenerator(@content[@outputIndex])
     else
-      @outputIndex = 0
+      if @replay
+        @outputIndex = -1
+        waitForIt delay, =>
+          @callNextOutput()
+          @container.innerHTML = ''
 
   outputGenerator: (output) ->
     type = output[0]

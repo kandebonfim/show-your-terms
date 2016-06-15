@@ -2,10 +2,9 @@
   var waitForIt;
 
   this.ShowYourTerms = (function() {
-    function ShowYourTerms(container, content1) {
+    function ShowYourTerms(container, replay) {
       this.container = container;
-      this.content = content1;
-      this.container = document.querySelector(this.container);
+      this.replay = replay != null ? replay : true;
       this.outputIndex = 0;
       this.content = [];
     }
@@ -41,7 +40,15 @@
           };
         })(this));
       } else {
-        return this.outputIndex = 0;
+        if (this.replay) {
+          this.outputIndex = -1;
+          return waitForIt(delay, (function(_this) {
+            return function() {
+              _this.callNextOutput();
+              return _this.container.innerHTML = '';
+            };
+          })(this));
+        }
       }
     };
 
