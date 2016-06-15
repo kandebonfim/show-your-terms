@@ -41,8 +41,7 @@
       if (options == null) {
         options = {};
       }
-      this.content.push(["command", content, options]);
-      return self;
+      return this.content.push(["command", content, options]);
     };
 
     ShowYourTerms.prototype.addLine = function(content, options) {
@@ -94,7 +93,7 @@
       } else {
         speed = 100;
       }
-      currentLine.className += " active";
+      currentLine.classList.add('active');
       if (type === "command") {
         characters = content.split('');
         counter = 0;
@@ -106,7 +105,7 @@
             _this.container.appendChild(currentLine);
             counter++;
             if (counter === characters.length) {
-              _this.removeClass(currentLine, 'active');
+              currentLine.classList.remove('active');
               _this.callNextOutput(options.delay);
               return clearInterval(interval);
             }
@@ -116,13 +115,9 @@
         text = document.createTextNode(content);
         currentLine.appendChild(text);
         this.container.appendChild(currentLine);
-        this.removeClass(currentLine, 'active');
+        currentLine.classList.remove('active');
         return this.callNextOutput(options.delay);
       }
-    };
-
-    ShowYourTerms.prototype.removeClass = function(el, classname) {
-      return el.className = el.className.replace(classname, '');
     };
 
     return ShowYourTerms;

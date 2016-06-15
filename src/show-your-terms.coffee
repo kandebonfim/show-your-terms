@@ -19,7 +19,6 @@ class @ShowYourTerms
 
   addCommand: (content, options = {}) ->
     @content.push ["command", content, options]
-    return self
 
   addLine: (content, options = {}) ->
     @content.push ["line", content, options]
@@ -49,7 +48,7 @@ class @ShowYourTerms
 
     if options.speed then speed = options.speed else speed = 100
 
-    currentLine.className += " active"
+    currentLine.classList.add('active')
 
     if type == "command"
       characters = content.split('')
