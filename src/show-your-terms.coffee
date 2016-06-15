@@ -41,13 +41,10 @@ class @ShowYourTerms
     type = output[0]
     content = output[1]
     options = output[2]
-
     currentLine = document.createElement("div")
 
     if options.styles then currentLine.setAttribute("class", options.styles)
-
     if options.speed then speed = options.speed else speed = 100
-
     currentLine.classList.add('active')
 
     if type == "command"
@@ -58,7 +55,6 @@ class @ShowYourTerms
         text = document.createTextNode(characters[counter])
         currentLine.appendChild(text)
         @container.appendChild(currentLine)
-
         counter++
 
         if counter == characters.length
@@ -66,7 +62,6 @@ class @ShowYourTerms
           @callNextOutput(options.delay)
           clearInterval interval
       ), speed)
-
     else
       text = document.createTextNode(content)
       currentLine.appendChild(text)
