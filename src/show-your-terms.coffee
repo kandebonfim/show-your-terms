@@ -63,7 +63,7 @@ class @ShowYourTerms
         counter++
 
         if counter == characters.length
-          @removeClass(currentLine, 'active')
+          currentLine.classList.remove('active')
           @callNextOutput(options.delay)
           clearInterval interval
       ), speed)
@@ -73,11 +73,8 @@ class @ShowYourTerms
       currentLine.appendChild(text)
       @container.appendChild(currentLine)
 
-      @removeClass(currentLine, 'active')
+      currentLine.classList.remove('active')
       @callNextOutput(options.delay)
-
-  removeClass: (el, classname) ->
-    el.className = el.className.replace(classname,'')
 
 # Helpers
 waitForIt = (ms, func) => setTimeout func, ms
