@@ -5,6 +5,9 @@
     function ShowYourTerms(container, replay) {
       this.container = container;
       this.replay = replay != null ? replay : true;
+      if (!this.container.nodeType) {
+        this.container = document.querySelector(this.container);
+      }
       this.outputIndex = 0;
       this.content = [];
       if (this.container.innerText.length > 0) {
