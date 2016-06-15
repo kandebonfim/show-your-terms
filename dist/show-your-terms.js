@@ -7,7 +7,33 @@
       this.replay = replay != null ? replay : true;
       this.outputIndex = 0;
       this.content = [];
+      if (this.container.innerText.length > 0) {
+        this.declarativeBuilder();
+      }
     }
+
+    ShowYourTerms.prototype.declarativeBuilder = function() {
+      var element, i, len, ref;
+      ref = this.container.children;
+      for (i = 0, len = ref.length; i < len; i++) {
+        element = ref[i];
+        switch (element.getAttribute('data-action')) {
+          case "command":
+            this.addCommand(element.innerText, {
+              styles: element.classList,
+              delay: element.getAttribute('data-delay')
+            });
+            break;
+          case "line":
+            this.addLine(element.innerText, {
+              styles: element.classList,
+              delay: element.getAttribute('data-delay')
+            });
+        }
+      }
+      this.container.style.height = window.getComputedStyle(this.container, null).getPropertyValue("height");
+      return this.container.innerHTML = '';
+    };
 
     ShowYourTerms.prototype.addCommand = function(content, options) {
       if (options == null) {

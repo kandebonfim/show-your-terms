@@ -2,6 +2,18 @@ class @ShowYourTerms
   constructor: (@container, @replay = true) ->
     @outputIndex = 0
     @content = []
+    if @container.innerText.length > 0
+      @declarativeBuilder()
+
+  declarativeBuilder: ->
+    for element in @container.children
+      switch element.getAttribute('data-action')
+        when "command"
+          @addCommand element.innerText, {styles: element.classList, delay: element.getAttribute('data-delay')}
+        when "line"
+          @addLine element.innerText, {styles: element.classList, delay: element.getAttribute('data-delay')}
+    @container.style.height = window.getComputedStyle(@container, null).getPropertyValue("height")
+    @container.innerHTML = ''
 
   addCommand: (content, options = {}) ->
     @content.push ["command", content, options]
