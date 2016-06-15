@@ -34,6 +34,8 @@ class @ShowYourTerms
     if options.styles
       currentLine.setAttribute("class", options.styles)
 
+    if options.speed then speed = options.speed else speed = 100
+
     currentLine.className += " active"
 
     switch type
@@ -52,7 +54,7 @@ class @ShowYourTerms
             @removeClass(currentLine, 'active')
             @callNextOutput(@outputIndex, options.delay)
             clearInterval interval
-        ), options.speed)
+        ), speed)
 
       when "line"
         text = document.createTextNode(content)
