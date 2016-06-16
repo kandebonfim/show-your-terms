@@ -41,8 +41,7 @@ class @ShowYourTerms
     if type == "command"
       counter = 0
       interval = setInterval(( =>
-        text = document.createTextNode(content[counter])
-        currentLine.appendChild(text)
+        currentLine.appendChild(document.createTextNode(content[counter]))
         @container.appendChild(currentLine)
         counter++
 
@@ -52,8 +51,7 @@ class @ShowYourTerms
           clearInterval interval
       ), speed)
     else
-      text = document.createTextNode(content)
-      currentLine.appendChild(text)
+      currentLine.appendChild(document.createTextNode(content))
       @container.appendChild(currentLine)
 
       currentLine.classList.remove('active')

@@ -60,7 +60,7 @@
     };
 
     ShowYourTerms.prototype.outputGenerator = function(output) {
-      var content, counter, currentLine, interval, options, speed, text, type;
+      var content, counter, currentLine, interval, options, speed, type;
       type = output[0], content = output[1], options = output[2];
       currentLine = document.createElement("div");
       if (options.styles) {
@@ -76,9 +76,7 @@
         counter = 0;
         return interval = setInterval(((function(_this) {
           return function() {
-            var text;
-            text = document.createTextNode(content[counter]);
-            currentLine.appendChild(text);
+            currentLine.appendChild(document.createTextNode(content[counter]));
             _this.container.appendChild(currentLine);
             counter++;
             if (counter === content.length) {
@@ -89,8 +87,7 @@
           };
         })(this)), speed);
       } else {
-        text = document.createTextNode(content);
-        currentLine.appendChild(text);
+        currentLine.appendChild(document.createTextNode(content));
         this.container.appendChild(currentLine);
         currentLine.classList.remove('active');
         return this.callNextOutput(options.delay);
