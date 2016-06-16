@@ -39,16 +39,14 @@ class @ShowYourTerms
     currentLine.classList.add('active')
 
     if type == "command"
-      characters = content.split('')
-
       counter = 0
       interval = setInterval(( =>
-        text = document.createTextNode(characters[counter])
+        text = document.createTextNode(content[counter])
         currentLine.appendChild(text)
         @container.appendChild(currentLine)
         counter++
 
-        if counter == characters.length
+        if counter == content.length
           currentLine.classList.remove('active')
           @callNextOutput(options.delay)
           clearInterval interval

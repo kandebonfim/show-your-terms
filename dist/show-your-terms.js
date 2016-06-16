@@ -60,7 +60,7 @@
     };
 
     ShowYourTerms.prototype.outputGenerator = function(output) {
-      var characters, content, counter, currentLine, interval, options, speed, text, type;
+      var content, counter, currentLine, interval, options, speed, text, type;
       type = output[0], content = output[1], options = output[2];
       currentLine = document.createElement("div");
       if (options.styles) {
@@ -73,16 +73,15 @@
       }
       currentLine.classList.add('active');
       if (type === "command") {
-        characters = content.split('');
         counter = 0;
         return interval = setInterval(((function(_this) {
           return function() {
             var text;
-            text = document.createTextNode(characters[counter]);
+            text = document.createTextNode(content[counter]);
             currentLine.appendChild(text);
             _this.container.appendChild(currentLine);
             counter++;
-            if (counter === characters.length) {
+            if (counter === content.length) {
               currentLine.classList.remove('active');
               _this.callNextOutput(options.delay);
               return clearInterval(interval);
