@@ -28,7 +28,7 @@
         }
       }
       this.container.style.height = window.getComputedStyle(this.container, null).getPropertyValue("height");
-      return this.start();
+      return this.play();
     };
 
     ShowYourTerms.prototype.addCommand = function(content, options) {
@@ -39,7 +39,7 @@
       return this.content.push(["line", content, options]);
     };
 
-    ShowYourTerms.prototype.start = function() {
+    ShowYourTerms.prototype.play = function() {
       this.container.innerHTML = '';
       this.outputIndex = 0;
       return this.outputGenerator(this.content[this.outputIndex]);
@@ -56,7 +56,7 @@
       } else if (this.replay) {
         return setTimeout(((function(_this) {
           return function() {
-            return _this.start();
+            return _this.play();
           };
         })(this)), delay);
       }

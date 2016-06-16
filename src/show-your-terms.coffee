@@ -14,7 +14,7 @@ class @ShowYourTerms
       else
         @addLine element.innerText, options
     @container.style.height = window.getComputedStyle(@container, null).getPropertyValue("height")
-    @start()
+    @play()
 
   addCommand: (content, options) ->
     @content.push ["command", content, options]
@@ -22,7 +22,7 @@ class @ShowYourTerms
   addLine: (content, options) ->
     @content.push ["line", content, options]
 
-  start: ->
+  play: ->
     @container.innerHTML = ''
     @outputIndex = 0
     @outputGenerator(@content[@outputIndex])
@@ -32,7 +32,7 @@ class @ShowYourTerms
     if @content[@outputIndex]
       setTimeout (=> @outputGenerator @content[@outputIndex]), delay
     else if @replay
-      setTimeout (=> @start()), delay
+      setTimeout (=> @play()), delay
 
   outputGenerator: (output) ->
     [type, content, options] = output
