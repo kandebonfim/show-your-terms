@@ -13,19 +13,16 @@
     }
 
     ShowYourTerms.prototype.declarativeBuilder = function() {
-      var element, i, len, options, ref;
+      var element, i, len, ref;
       ref = this.container.children;
       for (i = 0, len = ref.length; i < len; i++) {
         element = ref[i];
-        options = {
-          styles: element.classList,
-          delay: element.getAttribute('data-delay')
-        };
-        if (element.getAttribute('data-action') === "command") {
-          this.addCommand(element.innerText, options);
-        } else {
-          this.addLine(element.innerText, options);
-        }
+        this.content.push([
+          element.getAttribute('data-action'), element.innerText, {
+            styles: element.classList,
+            delay: element.getAttribute('data-delay')
+          }
+        ]);
       }
       this.container.style.height = window.getComputedStyle(this.container, null).getPropertyValue("height");
       return this.play();

@@ -8,11 +8,7 @@ class @ShowYourTerms
 
   declarativeBuilder: ->
     for element in @container.children
-      options = {styles: element.classList, delay: element.getAttribute('data-delay')}
-      if element.getAttribute('data-action') == "command"
-        @addCommand element.innerText, options
-      else
-        @addLine element.innerText, options
+      @content.push [element.getAttribute('data-action'), element.innerText, {styles: element.classList, delay: element.getAttribute('data-delay')}]
     @container.style.height = window.getComputedStyle(@container, null).getPropertyValue("height")
     @play()
 
