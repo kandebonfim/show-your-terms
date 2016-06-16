@@ -16,20 +16,18 @@
     }
 
     ShowYourTerms.prototype.declarativeBuilder = function() {
-      var element, i, len, ref;
+      var element, i, len, options, ref;
       ref = this.container.children;
       for (i = 0, len = ref.length; i < len; i++) {
         element = ref[i];
+        options = {
+          styles: element.classList,
+          delay: element.getAttribute('data-delay')
+        };
         if (element.getAttribute('data-action') === "command") {
-          this.addCommand(element.innerText, {
-            styles: element.classList,
-            delay: element.getAttribute('data-delay')
-          });
+          this.addCommand(element.innerText, options);
         } else {
-          this.addLine(element.innerText, {
-            styles: element.classList,
-            delay: element.getAttribute('data-delay')
-          });
+          this.addLine(element.innerText, options);
         }
       }
       this.container.style.height = window.getComputedStyle(this.container, null).getPropertyValue("height");
@@ -38,16 +36,10 @@
     };
 
     ShowYourTerms.prototype.addCommand = function(content, options) {
-      if (options == null) {
-        options = {};
-      }
       return this.content.push(["command", content, options]);
     };
 
     ShowYourTerms.prototype.addLine = function(content, options) {
-      if (options == null) {
-        options = {};
-      }
       return this.content.push(["line", content, options]);
     };
 
@@ -59,7 +51,7 @@
       if (delay == null) {
         delay = 800;
       }
-      this.outputIndex = this.outputIndex + 1;
+      this.outputIndex += 1;
       if (this.content[this.outputIndex]) {
         return waitForIt(delay, (function(_this) {
           return function() {

@@ -9,25 +9,26 @@ class @ShowYourTerms
 
   declarativeBuilder: ->
     for element in @container.children
+      options = {styles: element.classList, delay: element.getAttribute('data-delay')}
       if element.getAttribute('data-action') == "command"
-        @addCommand element.innerText, {styles: element.classList, delay: element.getAttribute('data-delay')}
+        @addCommand element.innerText, options
       else
-        @addLine element.innerText, {styles: element.classList, delay: element.getAttribute('data-delay')}
+        @addLine element.innerText, options
     @container.style.height = window.getComputedStyle(@container, null).getPropertyValue("height")
     @container.innerHTML = ''
     @start()
 
-  addCommand: (content, options = {}) ->
+  addCommand: (content, options) ->
     @content.push ["command", content, options]
 
-  addLine: (content, options = {}) ->
+  addLine: (content, options) ->
     @content.push ["line", content, options]
 
   start: ->
     @outputGenerator(@content[@outputIndex])
 
   callNextOutput: (delay = 800) ->
-    @outputIndex = @outputIndex + 1
+    @outputIndex += 1
     if @content[@outputIndex]
       waitForIt delay, => @outputGenerator(@content[@outputIndex])
     else
