@@ -56,15 +56,14 @@
             return _this.outputGenerator(_this.content[_this.outputIndex]);
           };
         })(this)), delay);
-      } else {
-        if (this.replay) {
-          this.outputIndex = -1;
-          return setTimeout(((function(_this) {
-            return function() {
-              return _this.callNextOutput()(_this.container.innerHTML = '');
-            };
-          })(this)), delay);
-        }
+      } else if (this.replay) {
+        this.outputIndex = -1;
+        return setTimeout(((function(_this) {
+          return function() {
+            _this.callNextOutput();
+            return _this.container.innerHTML = '';
+          };
+        })(this)), delay);
       }
     };
 

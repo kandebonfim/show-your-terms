@@ -31,10 +31,9 @@ class @ShowYourTerms
     @outputIndex += 1
     if @content[@outputIndex]
       setTimeout (=> @outputGenerator @content[@outputIndex]), delay
-    else
-      if @replay
-        @outputIndex = -1
-        setTimeout (=> @callNextOutput() @container.innerHTML = ''), delay
+    else if @replay
+      @outputIndex = -1
+      setTimeout (=> @callNextOutput(); @container.innerHTML = ''), delay
 
   outputGenerator: (output) ->
     [type, content, options] = output
