@@ -2,7 +2,6 @@ class @ShowYourTerms
   constructor: (@container, @replay = true) ->
     unless @container.nodeType
       @container = document.querySelector(@container)
-    @outputIndex = 0
     @content = []
     if @container.innerText.length > 0
       @declarativeBuilder()
@@ -15,7 +14,6 @@ class @ShowYourTerms
       else
         @addLine element.innerText, options
     @container.style.height = window.getComputedStyle(@container, null).getPropertyValue("height")
-    @container.innerHTML = ''
     @start()
 
   addCommand: (content, options) ->
@@ -25,6 +23,8 @@ class @ShowYourTerms
     @content.push ["line", content, options]
 
   start: ->
+    @container.innerHTML = ''
+    @outputIndex = 0
     @outputGenerator(@content[@outputIndex])
 
   callNextOutput: (delay) ->
@@ -32,8 +32,7 @@ class @ShowYourTerms
     if @content[@outputIndex]
       setTimeout (=> @outputGenerator @content[@outputIndex]), delay
     else if @replay
-      @outputIndex = -1
-      setTimeout (=> @callNextOutput(); @container.innerHTML = ''), delay
+      setTimeout (=> @start()), delay
 
   outputGenerator: (output) ->
     [type, content, options] = output

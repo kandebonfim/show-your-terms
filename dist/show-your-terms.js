@@ -6,7 +6,6 @@
       if (!this.container.nodeType) {
         this.container = document.querySelector(this.container);
       }
-      this.outputIndex = 0;
       this.content = [];
       if (this.container.innerText.length > 0) {
         this.declarativeBuilder();
@@ -29,7 +28,6 @@
         }
       }
       this.container.style.height = window.getComputedStyle(this.container, null).getPropertyValue("height");
-      this.container.innerHTML = '';
       return this.start();
     };
 
@@ -42,6 +40,8 @@
     };
 
     ShowYourTerms.prototype.start = function() {
+      this.container.innerHTML = '';
+      this.outputIndex = 0;
       return this.outputGenerator(this.content[this.outputIndex]);
     };
 
@@ -54,11 +54,9 @@
           };
         })(this)), delay);
       } else if (this.replay) {
-        this.outputIndex = -1;
         return setTimeout(((function(_this) {
           return function() {
-            _this.callNextOutput();
-            return _this.container.innerHTML = '';
+            return _this.start();
           };
         })(this)), delay);
       }
