@@ -27,7 +27,7 @@ class @ShowYourTerms
   start: ->
     @outputGenerator(@content[@outputIndex])
 
-  callNextOutput: (delay = 800) ->
+  callNextOutput: (delay) ->
     @outputIndex += 1
     if @content[@outputIndex]
       setTimeout (=> @outputGenerator @content[@outputIndex]), delay

@@ -46,9 +46,6 @@
     };
 
     ShowYourTerms.prototype.callNextOutput = function(delay) {
-      if (delay == null) {
-        delay = 800;
-      }
       this.outputIndex += 1;
       if (this.content[this.outputIndex]) {
         return setTimeout(((function(_this) {
