@@ -39,9 +39,7 @@ class @ShowYourTerms
           @container.innerHTML = ''
 
   outputGenerator: (output) ->
-    type = output[0]
-    content = output[1]
-    options = output[2]
+    [type, content, options] = output
     currentLine = document.createElement("div")
 
     if options.styles then currentLine.setAttribute("class", options.styles)

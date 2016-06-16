@@ -73,9 +73,7 @@
 
     ShowYourTerms.prototype.outputGenerator = function(output) {
       var characters, content, counter, currentLine, interval, options, speed, text, type;
-      type = output[0];
-      content = output[1];
-      options = output[2];
+      type = output[0], content = output[1], options = output[2];
       currentLine = document.createElement("div");
       if (options.styles) {
         currentLine.setAttribute("class", options.styles);
