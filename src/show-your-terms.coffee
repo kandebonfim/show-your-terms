@@ -9,7 +9,7 @@ class @ShowYourTerms
   declarativeBuilder: ->
     for element in @container.children
       @content.push [element.getAttribute('data-action'), element.innerText, {styles: element.classList, delay: element.getAttribute('data-delay')}]
-    @container.style.height = window.getComputedStyle(@container, null).getPropertyValue("height")
+    @container.style.height = window.getComputedStyle(@container, null).getPropertyValue "height"
     @play()
 
   addCommand: (content, options) ->
@@ -21,7 +21,7 @@ class @ShowYourTerms
   play: ->
     @container.innerHTML = ''
     @outputIndex = 0
-    @outputGenerator(@content[@outputIndex])
+    @outputGenerator @content[@outputIndex]
 
   callNextOutput: (delay) ->
     @outputIndex += 1
@@ -32,27 +32,25 @@ class @ShowYourTerms
 
   outputGenerator: (output) ->
     [type, content, options] = output
-    currentLine = document.createElement("div")
+    currentLine = document.createElement "div"
 
-    if options.styles then currentLine.setAttribute("class", options.styles)
+    if options.styles then currentLine.setAttribute "class", options.styles
     if options.speed then speed = options.speed else speed = 100
-    currentLine.classList.add('active')
+    currentLine.classList.add 'active'
 
     if type == "command"
       counter = 0
-      interval = setInterval(( =>
-        currentLine.appendChild(document.createTextNode(content[counter]))
-        @container.appendChild(currentLine)
+      interval = setInterval ( =>
+        currentLine.appendChild document.createTextNode(content[counter])
+        @container.appendChild currentLine
         counter++
-
         if counter == content.length
-          currentLine.classList.remove('active')
-          @callNextOutput(options.delay)
+          currentLine.classList.remove 'active'
+          @callNextOutput options.delay
           clearInterval interval
-      ), speed)
+      ), speed
     else
-      currentLine.appendChild(document.createTextNode(content))
-      @container.appendChild(currentLine)
-
-      currentLine.classList.remove('active')
-      @callNextOutput(options.delay)
+      currentLine.appendChild document.createTextNode(content)
+      @container.appendChild currentLine
+      currentLine.classList.remove 'active'
+      @callNextOutput options.delay
