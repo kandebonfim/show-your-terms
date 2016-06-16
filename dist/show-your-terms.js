@@ -1,6 +1,4 @@
 (function() {
-  var waitForIt;
-
   this.ShowYourTerms = (function() {
     function ShowYourTerms(container, replay) {
       this.container = container;
@@ -53,20 +51,19 @@
       }
       this.outputIndex += 1;
       if (this.content[this.outputIndex]) {
-        return waitForIt(delay, (function(_this) {
+        return setTimeout(((function(_this) {
           return function() {
             return _this.outputGenerator(_this.content[_this.outputIndex]);
           };
-        })(this));
+        })(this)), delay);
       } else {
         if (this.replay) {
           this.outputIndex = -1;
-          return waitForIt(delay, (function(_this) {
+          return setTimeout(((function(_this) {
             return function() {
-              _this.callNextOutput();
-              return _this.container.innerHTML = '';
+              return _this.callNextOutput()(_this.container.innerHTML = '');
             };
-          })(this));
+          })(this)), delay);
         }
       }
     };
@@ -113,11 +110,5 @@
     return ShowYourTerms;
 
   })();
-
-  waitForIt = (function(_this) {
-    return function(ms, func) {
-      return setTimeout(func, ms);
-    };
-  })(this);
 
 }).call(this);

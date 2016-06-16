@@ -30,13 +30,11 @@ class @ShowYourTerms
   callNextOutput: (delay = 800) ->
     @outputIndex += 1
     if @content[@outputIndex]
-      waitForIt delay, => @outputGenerator(@content[@outputIndex])
+      setTimeout (=> @outputGenerator @content[@outputIndex]), delay
     else
       if @replay
         @outputIndex = -1
-        waitForIt delay, =>
-          @callNextOutput()
-          @container.innerHTML = ''
+        setTimeout (=> @callNextOutput() @container.innerHTML = ''), delay
 
   outputGenerator: (output) ->
     [type, content, options] = output
@@ -68,6 +66,3 @@ class @ShowYourTerms
 
       currentLine.classList.remove('active')
       @callNextOutput(options.delay)
-
-# Helpers
-waitForIt = (ms, func) => setTimeout func, ms
