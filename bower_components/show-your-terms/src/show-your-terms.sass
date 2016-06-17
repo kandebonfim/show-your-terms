@@ -1,0 +1,86 @@
+$term-color-header: #E1DFE1
+$term-color-background: #1D1F20
+
+$term-color-red: #EB5E56
+$term-color-yellow: #F7BF33
+$term-color-green: #69CA42
+$term-color-blue: #4A90E2
+$term-color-grey: rgba(white, .6)
+
+$term-header-height: 26px
+$term-header-buttons-size: $term-header-height * .4
+$term-header-buttons-distance: 6px
+
+$term-border-radius: 6px
+
+.showyourterms
+  position: relative
+  background-color: $term-color-background
+  padding: 14px
+  color: white
+  margin-top: $term-header-height + 10px
+  border-radius: 0 0 $term-border-radius $term-border-radius
+
+  font-family: "Roboto Mono"
+  font-size: 14px
+
+  &:before,
+  &:after
+    content: ''
+    position: absolute
+
+  &:before
+    width: 100%
+    left: 0
+    top: -$term-header-height
+    height: $term-header-height
+    background-color: $term-color-header
+    border-radius: $term-border-radius $term-border-radius 0 0
+
+  &:after
+    width: $term-header-buttons-size
+    height: $term-header-buttons-size
+    top: -$term-header-height / 2 - $term-header-buttons-size / 2
+    left: $term-header-buttons-size * .8
+    border-radius: 50%
+    background-color: $term-color-red
+    box-shadow: ($term-header-buttons-size+$term-header-buttons-distance) 0 0 0 $term-color-yellow, ($term-header-buttons-size+$term-header-buttons-distance)*2 0 0 0 $term-color-green
+
+  .red
+    color: $term-color-red
+
+  .yellow
+    color: $term-color-yellow
+
+  .green
+    color: $term-color-green
+
+  .blue
+    color: $term-color-blue
+
+  .grey
+    color: $term-color-grey
+
+  .command
+    &:before
+      content: '$ '
+      opacity: .7
+
+  .command.active:after
+    content: '|'
+    animation: showyourterms_blinker 1s linear infinite
+
+  .type
+    &:before
+      content: '>> '
+      opacity: .7
+
+  .blink
+    animation: showyourterms_blinker 1s linear infinite
+
+@keyframes showyourterms_blinker
+  0%, 50%
+    opacity: 0
+  51%, 100%
+    opacity: 1
+

@@ -1,0 +1,34 @@
+{
+  "name": "show-your-terms",
+  "authors": [
+    "Kande Bonfim <kandebonfim@gmail.com>"
+  ],
+  "description": "Simple demos of your applications' terminal commands.",
+  "main": "show-your-terms.js",
+  "moduleType": [],
+  "keywords": [
+    "terminal",
+    "shell",
+    "bash",
+    "commands"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/kandebonfim/show-your-terms",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "d2d97d5d03",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "d2d97d5d032dc9ccaffd53bae8829f38d99c4cdb"
+  },
+  "_source": "https://github.com/kandebonfim/show-your-terms.git",
+  "_target": "*",
+  "_originalSource": "show-your-terms",
+  "_direct": true
+}

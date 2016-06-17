@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo - Show your terms</title>
+  <script src="../dist/show-your-terms.min.js"></script>
+  <link rel="stylesheet" href="../dist/show-your-terms.min.css">
+</head>
+<body>
+  <div class="showyourterms term"></div>
+
+  <script>
+    example = new ShowYourTerms('.term')
+    example.addCommand('Hello, show your terms!', {speed: 100, delay: 500})
+    example.addLine('hi, motherfocka!', {styles: 'yellow'})
+    example.addCommand('What is your name?', {speed: 100, delay: 500})
+    example.addLine('My name is Terms, Show Your Terms.', {styles: 'yellow'})
+    example.start()
+  </script>
+</body>
+</html>

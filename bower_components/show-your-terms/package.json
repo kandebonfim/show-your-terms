@@ -1,0 +1,25 @@
+{
+  "name": "show-your-terms",
+  "authors": [
+    "Kande Bonfim <kandebonfim@gmail.com>"
+  ],
+  "description": "Simple demos of your applications' terminal commands.",
+  "main": "show-your-terms.js",
+  "moduleType": [],
+  "keywords": [
+    "terminal",
+    "shell",
+    "bash",
+    "commands"
+  ],
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-coffee": "^1.0.0",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^0.5.1",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}

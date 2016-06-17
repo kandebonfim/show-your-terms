@@ -1,0 +1,24 @@
+{
+  "name": "show-your-terms",
+  "authors": [
+    "Kande Bonfim <kandebonfim@gmail.com>"
+  ],
+  "description": "Simple demos of your applications' terminal commands.",
+  "main": "show-your-terms.js",
+  "moduleType": [],
+  "keywords": [
+    "terminal",
+    "shell",
+    "bash",
+    "commands"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
