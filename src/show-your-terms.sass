@@ -1,11 +1,14 @@
 $term-color-header: #E1DFE1
-$term-color-background: #1D1F20
+$term-color-background: rgba(#1D1F20, .95)
 
 $term-color-red: #EB5E56
 $term-color-yellow: #F7BF33
 $term-color-green: #69CA42
 $term-color-blue: #4A90E2
 $term-color-grey: rgba(white, .6)
+
+$term-th-dark: darken(white, 70deg)
+$term-th-light: rgba(white, .95)
 
 $term-header-height: 26px
 $term-header-buttons-size: $term-header-height * .4
@@ -21,7 +24,7 @@ $term-border-radius: 6px
   margin-top: $term-header-height + 10px
   border-radius: 0 0 $term-border-radius $term-border-radius
 
-  font-family: "Roboto Mono"
+  font-family: "Roboto Mono", monospace
   font-size: 14px
 
   &:before,
@@ -29,6 +32,7 @@ $term-border-radius: 6px
     content: ''
     position: absolute
 
+  // Bar
   &:before
     width: 100%
     left: 0
@@ -36,7 +40,10 @@ $term-border-radius: 6px
     height: $term-header-height
     background-color: $term-color-header
     border-radius: $term-border-radius $term-border-radius 0 0
+    color: $term-th-dark
+    font-size: 14px
 
+  // Bar buttons
   &:after
     width: $term-header-buttons-size
     height: $term-header-buttons-size
@@ -46,6 +53,23 @@ $term-border-radius: 6px
     background-color: $term-color-red
     box-shadow: ($term-header-buttons-size+$term-header-buttons-distance) 0 0 0 $term-color-yellow, ($term-header-buttons-size+$term-header-buttons-distance)*2 0 0 0 $term-color-green
 
+  // Themes
+  &.dark:before
+    background-color: $term-th-dark
+    color: $term-th-light
+
+  &.light
+    background-color: $term-th-light
+    color: $term-th-dark
+
+  // Window name
+  &[data-title]:before
+    content: attr(data-title)
+    height: 18px
+    text-align: center
+    padding: 4px 0
+
+  // Output colors
   .red
     color: $term-color-red
 
@@ -61,26 +85,24 @@ $term-border-radius: 6px
   .grey
     color: $term-color-grey
 
-  .command
-    &:before
-      content: '$ '
-      opacity: .7
+  // Output types
+  .command:before,.type:before
+    opacity: .7
+
+  .command:before
+    content: '$ '
 
   .command.active:after
     content: '|'
-    animation: showyourterms_blinker 1s linear infinite
 
-  .type
-    &:before
-      content: '>> '
-      opacity: .7
+  .type:before
+    content: '> '
 
-  .blink
-    animation: showyourterms_blinker 1s linear infinite
+  .blink,.command.active:after
+    animation: syt_b 1s linear infinite
 
-@keyframes showyourterms_blinker
-  0%, 50%
+@keyframes syt_b
+  0%,50%
     opacity: 0
-  51%, 100%
+  51%,100%
     opacity: 1
-
