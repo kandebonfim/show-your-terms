@@ -85,6 +85,9 @@ $term-border-radius: 6px
   .grey
     color: $term-color-grey
 
+  .underlined
+    text-decoration: underline
+
   // Output types
   .command:before,.type:before
     opacity: .7
@@ -98,7 +101,7 @@ $term-border-radius: 6px
   .type:before
     content: '> '
 
-  .blink,.command.active:after
+  .blink,.command.active:after,.type.active:after
     animation: syt_b 1s linear infinite
 
 @keyframes syt_b
