@@ -21,11 +21,11 @@
     "test",
     "tests"
   ],
-  "_release": "d2d97d5d03",
+  "_release": "c17104a994",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "d2d97d5d032dc9ccaffd53bae8829f38d99c4cdb"
+    "commit": "c17104a99445c25e51a42e2b13b610c3a4a125a3"
   },
   "_source": "https://github.com/kandebonfim/show-your-terms.git",
   "_target": "*",
