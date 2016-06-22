@@ -95,11 +95,11 @@ $term-border-radius: 6px
   .command:before
     content: '$ '
 
-  .command.active:after
-    content: '|'
-
   .type:before
     content: '> '
+
+  .command.active:after,.type.active:after
+    content: '|'
 
   .blink,.command.active:after,.type.active:after
     animation: syt_b 1s linear infinite
