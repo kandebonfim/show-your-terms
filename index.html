@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Show your terms! by kandebonfim</title>
+    <title>Show your terms! - Simple demos of your applications' terminal commands.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/application.css" media="screen">
@@ -27,17 +27,22 @@
     <div class="section">
       <div class="container">
         <h3 class="section__title">Why?</h3>
-        <p class="section__paragraph">Sometimes you just want to show your user how to use your cli application </p>
+        <p class="section__paragraph">CLI interactions are confusing to understand at first sight because the commands are mixed with the application response.</p>
+        <p class="section__paragraph">It's very important to be didactic to your users and Show your terms! can help you with that!</p>
 
-        <h3 class="section__title">Instalation</h3>
-        <p class="section__paragraph">You can install it via bower:</p>
+        <h3 class="section__title">Size & Performance</h3>
+        <p class="section__paragraph">Show your terms! script has just ~1.8Kb minified and its very performance-aware. The CSS file has ~1.4Kb and is <a href="#styles">optional</a>.</p>
+
+        <h3 class="section__title"><a href="#instalation" id="instalation">Instalation</a></h3>
+        <p class="section__paragraph">Enjoying a package manager?</p>
         <div class="showyourterms" data-title='bower'>
           <div class="command">bower install show-your-terms</div>
         </div>
-        <p class="section__paragraph">npm:</p>
         <div class="showyourterms" data-title='npm'>
           <div class="command">npm install show-your-terms</div>
         </div>
+        <br>
+
         <p class="section__paragraph">Import it using <a href="https://rawgit.com/" target="_blank">rawgit.com</a>:</p>
         <pre><code class="html">
   &lt;!-- javascript --&gt;
@@ -45,9 +50,11 @@
   &lt;!-- stylesheet --&gt;
   &lt;link rel='stylesheet' href='https://cdn.rawgit.com/kandebonfim/show-your-terms/master/dist/show-your-terms.min.css'&gt;
         </code></pre>
-        <p class="section__paragraph">Or just <a href="https://github.com/kandebonfim/show-your-terms/archive/master.zip">download the zip file</a>.</p>
+        <br>
 
-        <h3 class="section__title">Usage</h3>
+        <p class="section__paragraph">Or just <a href="https://github.com/kandebonfim/show-your-terms/archive/master.zip">↓ download the zip file ↓</a>.</p>
+
+        <h3 class="section__title"><a href="#usage" id="usage">Usage</a></h3>
         <p class="section__paragraph">You can use Show your terms! in <strong>declarative</strong> way (recommended):</p>
         <pre><code class="html">
   &lt;div class='showyourterms'&gt;
@@ -76,7 +83,7 @@
   syt.play();
         </code></pre>
 
-        <h3 class="section__title">Styles</h3>
+        <h3 class="section__title"><a href="#styles" id="styles">Styles</a></h3>
         <p class="section__paragraph">Show Your Terms' styles are optional, but pretty nice!</p>
         <div class="showyourterms">
           <div class="command">This is a command.</div>
@@ -92,25 +99,19 @@
           <div class="command active">...and while typing a command too.</div>
         </div>
 
-        <h3 class="section__title">Themes</h3>
+        <h3 class="section__title"><a href="#themes" id="themes">Themes</a></h3>
         <p class="section__paragraph">You can choose with color scheme matchs better with your website:</p>
         <div class="showyourterms" data-title="Regular">
-          <div class="command">Hello, show your terms!</div>
-          <div class="blue">hi, motherfocka!</div>
-          <div class="command">What is your name?</div>
-          <div class="blue">My name is Terms, Show Your Terms.</div>
+          <div class="command">So, how you doing?</div>
+          <div class="grey">hmpf, pretty standart.</div>
         </div>
         <div class="showyourterms dark" data-title="Dark">
-          <div class="command">Hello, show your terms!</div>
-          <div class="blue">hi, motherfocka!</div>
-          <div class="command">What is your name?</div>
-          <div class="blue">My name is Terms, Show Your Terms.</div>
+          <div class="command">hm, and now?</div>
+          <div class="grey">dude, I'm so dark and goth.</div>
         </div>
         <div class="showyourterms light" data-title="Light">
-          <div class="command">Hello, show your terms!</div>
-          <div class="blue">hi, motherfocka!</div>
-          <div class="command">What is your name?</div>
-          <div class="blue">My name is Terms, Show Your Terms.</div>
+          <div class="command">how about this one?</div>
+          <div class="grey">I see the light! AND IT HURTS!</div>
         </div>
 
         <h3 class="section__title">That's it</h3>
@@ -118,11 +119,14 @@
       </div>
     </div>
     <div class="footer">
-      <div class="container text-align-center">Created by <a href="http://www.kandebonfim.com/" target="_blank">Kande Bonfim</a> and supported by <a href="http://www.startae.com/" target="_blank">Startaê Team</a>.</div>
+      <div class="container text-align-center">Created by <a href="http://www.kandebonfim.com/" target="_blank">Kande Bonfim</a> and supported by <a href="http://www.startae.com/" target="_blank">Startaê Team</a> under <a href="https://mit-license.org/" target="_blank">MIT License</a>.</div>
     </div>
+    <!-- highlight.js -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/monokai-sublime.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
-    <script src="javascript/application.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- main scripts -->
+    <script src="javascript/application.js"></script>
   </body>
 </html>
