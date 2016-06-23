@@ -11,7 +11,17 @@
   font-weight: 900
 
   * + &
-    margin-top: 40px
+    margin-top: 50px
+
+  a
+    &:before
+      content: "#"
+      position: absolute
+      margin-left: -24px
+      opacity: .2
+
+    &:hover:before
+      opacity: .8
 
 .section__subtitle
   font-weight: bold
