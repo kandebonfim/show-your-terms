@@ -2,23 +2,19 @@
 // @name hero
 
 .hero
-  padding-top: 100px
+  padding-top: 60px
+
+  +respond-to(medium)
+    padding-top: 100px
 
 .hero__logo
-  max-width: 50%
+  max-width: 70%
+
+  +respond-to(medium)
+    max-width: 50%
 
 .hero__phrase
-  font-size: 24px
   margin: 10px 0 50px
 
-.hero__link
-  position: fixed
-  width: 150px
-  left: 0
-  top: 0
-  margin: 30px
-  text-align: left
-  text-decoration: none
-
-  &:hover
-    text-decoration: underline
+  +respond-to(medium)
+    font-size: 24px

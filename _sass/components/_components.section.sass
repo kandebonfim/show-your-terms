@@ -5,7 +5,7 @@
   padding: 60px 0
 
 .section__title
-  font-size: 22px
+  font-size: 18px
   padding-bottom: 3px
   border-bottom: 1px solid rgba(white, .2)
   font-weight: 900
@@ -13,22 +13,28 @@
   * + &
     margin-top: 50px
 
+  +respond-to(medium)
+    font-size: 22px
+
   a
     &:before
       content: ">"
       position: absolute
-      margin-left: -24px
+      margin-left: -14px
       opacity: .2
+
+      +respond-to(medium)
+        margin-left: -24px
 
     &:hover:before
       opacity: .8
 
-.section__subtitle
-  font-weight: bold
-
 .section__paragraph
   margin: 14px 0
   opacity: .8
+
+  +respond-to(small)
+    font-size: 14px
 
 .section__screenshot
   width: 100%
