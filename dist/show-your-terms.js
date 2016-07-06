@@ -24,7 +24,7 @@
           }
         ]);
       }
-      this.container.style.height = window.getComputedStyle(this.container, null).getPropertyValue("height");
+      this.container.style.minHeight = window.getComputedStyle(this.container, null).getPropertyValue("height");
       return this.play();
     };
 
