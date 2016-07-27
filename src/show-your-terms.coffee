@@ -1,21 +1,38 @@
 class @ShowYourTerms
-  constructor: (@container, @replay = true) ->
+  constructor: (@container, @replay = true, @termsOptions={}) ->
+    defaultOptions = { single: false,
+    pauseOnClick: true }
+    for key,val of defaultOptions
+      if key not of @termsOptions
+        @termsOptions[key] = val
+
     unless @container.nodeType
       @container = document.querySelectorAll(@container)
     @content = []
+    @sstatus = []
     @outputIndex = []
-    for i in [0..@container.length-1] 
-      console.log(i, @container[i])
-      @content[i] = []
-      if @container[i].innerText.length > 0
+    if @container.length > 0
+      total = @container.length-1
+      if @termsOptions['single']
+        total=0
+      for i in [0..total] 
         @content[i] = []
-        @declarativeBuilder(i)
+        @sstatus[i] = "ready"
+        @defineEvents i
+        if @container[i].innerText.length > 0
+          @declarativeBuilder(i)
 
-  declarativeBuilder: (containerIndex) ->
-    for element in @container[containerIndex].children
-      @content[containerIndex].push [element.getAttribute('data-action'), element.innerText, {styles: element.classList, delay: element.getAttribute('data-delay'), speed: element.getAttribute('data-speed')}]
-    @container[containerIndex].style.minHeight = window.getComputedStyle(@container[containerIndex], null).getPropertyValue "height"
-    @play(containerIndex)
+  declarativeBuilder: (outputTerm) ->
+    for element in @container[outputTerm].children
+      @content[outputTerm].push [element.getAttribute('data-action'), element.innerText, {styles: element.classList, delay: element.getAttribute('data-delay'), speed: element.getAttribute('data-speed')}]
+    @container[outputTerm].style.minHeight = window.getComputedStyle(@container[outputTerm], null).getPropertyValue "height"
+    @play(outputTerm)
+
+  defineEvents: (outputTerm) ->
+    if @termsOptions['pauseOnClick']
+      @container[outputTerm].addEventListener('click', ( =>
+        @togglePause outputTerm
+      ))
 
   addCommand: (content, options) ->
     @content[0].push ["command", content, options]
@@ -23,19 +40,34 @@ class @ShowYourTerms
   addLine: (content, options) ->
     @content[0].push ["line", content, options]
 
-  play: (outputChild=0) ->
-    @container[outputChild].innerHTML = ''
-    @outputIndex[outputChild] = 0
-    @outputGenerator @content[outputChild][@outputIndex[outputChild]], outputChild
+  play: (outputTerm=0) ->
+    if @sstatus[outputTerm] == "ready"
+      @sstatus[outputTerm] = "playing"
+      @container[outputTerm].innerHTML = ''
+      @outputIndex[outputTerm] = 0
+      @outputGenerator @content[outputTerm][@outputIndex[outputTerm]], outputTerm
 
-  callNextOutput: (delay, outputChild) ->
-    @outputIndex[outputChild] += 1
-    if @content[outputChild][@outputIndex[outputChild]]
-      setTimeout (=> @outputGenerator @content[outputChild][@outputIndex[outputChild]], outputChild), delay
+  playagain: (outputTerm=0) ->
+    @sstatus[outputTerm] = "ready"
+    @play outputTerm
+
+  callNextOutput: (delay, outputTerm) ->
+    @outputIndex[outputTerm] += 1
+    if @content[outputTerm][@outputIndex[outputTerm]]
+      setTimeout (=> @outputGenerator @content[outputTerm][@outputIndex[outputTerm]], outputTerm), delay
     else if @replay
-      setTimeout (=> @play(outputChild)), delay
+      setTimeout (=> @playagain(outputTerm)), delay
 
-  outputGenerator: (output, outputChild) ->
+  isPlaying: (outputTerm) ->
+    return @sstatus[outputTerm] == "playing"
+
+  togglePause: (outputTerm) ->
+    if @sstatus[outputTerm] == "playing"
+      @sstatus[outputTerm] = "pause";
+    else if @sstatus[outputTerm] == "pause"
+      @sstatus[outputTerm] = "playing"
+
+  outputGenerator: (output, outputTerm) ->
     [type, content, options] = output
     currentLine = document.createElement "div"
     if options.styles then currentLine.setAttribute "class", options.styles
@@ -45,16 +77,17 @@ class @ShowYourTerms
     if type == "command"
       counter = 0
       interval = setInterval ( =>
-        currentLine.appendChild document.createTextNode(content[counter])
-        @container[outputChild].appendChild currentLine
-        counter++
-        if counter == content.length
-          currentLine.classList.remove 'active'
-          @callNextOutput options.delay,outputChild
-          clearInterval interval
+        if @isPlaying outputTerm
+          currentLine.appendChild document.createTextNode(content[counter])
+          @container[outputTerm].appendChild currentLine
+          counter++
+          if counter == content.length
+            currentLine.classList.remove 'active'
+            @callNextOutput options.delay,outputTerm
+            clearInterval interval
       ), speed
     else
       currentLine.appendChild document.createTextNode(content)
-      @container[outputChild].appendChild currentLine
+      @container[outputTerm].appendChild currentLine
       currentLine.classList.remove 'active'
-      @callNextOutput options.delay,outputChild
+      @callNextOutput options.delay,outputTerm
