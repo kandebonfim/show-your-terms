@@ -87,7 +87,13 @@ class @ShowYourTerms
             clearInterval interval
       ), speed
     else
-      currentLine.appendChild document.createTextNode(content)
-      @container[outputTerm].appendChild currentLine
-      currentLine.classList.remove 'active'
-      @callNextOutput options.delay,outputTerm
+      if not @isPlaying outputTerm
+        pauseInterval = setInterval ( =>
+          if @isPlaying outputTerm
+            clearInterval pauseInterval
+	), speed
+      else
+        currentLine.appendChild document.createTextNode(content)
+        @container[outputTerm].appendChild currentLine
+        currentLine.classList.remove 'active'
+        @callNextOutput options.delay,outputTerm
