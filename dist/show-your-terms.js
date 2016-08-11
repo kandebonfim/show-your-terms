@@ -145,6 +145,9 @@
       }
       currentLine.classList.add('active');
       if (type === "command") {
+        if (!currentLine.classList.contains('type')) {
+          currentLine.classList.add('command');
+        }
         counter = 0;
         return interval = setInterval(((function(_this) {
           return function() {

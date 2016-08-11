@@ -77,6 +77,8 @@ class @ShowYourTerms
     currentLine.classList.add 'active'
 
     if type == "command"
+      if not currentLine.classList.contains 'type'
+        currentLine.classList.add 'command'
       counter = 0
       interval = setInterval ( =>
         if @isPlaying outputTerm
