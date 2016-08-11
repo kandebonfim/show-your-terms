@@ -95,6 +95,7 @@ class @ShowYourTerms
         pauseInterval = setInterval ( =>
           if @isPlaying outputTerm
             clearInterval pauseInterval
+            @callNextOutput options.delay,outputTerm
 	), speed
       else
         currentLine.appendChild document.createTextNode(content)

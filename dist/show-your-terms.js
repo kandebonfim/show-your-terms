@@ -168,7 +168,8 @@
           return pauseInterval = setInterval(((function(_this) {
             return function() {
               if (_this.isPlaying(outputTerm)) {
-                return clearInterval(pauseInterval);
+                clearInterval(pauseInterval);
+                return _this.callNextOutput(options.delay, outputTerm);
               }
             };
           })(this)), speed);
