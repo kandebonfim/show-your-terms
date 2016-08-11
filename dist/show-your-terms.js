@@ -64,12 +64,22 @@
       }
     };
 
-    ShowYourTerms.prototype.addCommand = function(content, options) {
-      return this.content[0].push(["command", content, options]);
+    ShowYourTerms.prototype.addCommand = function(content, options, outputTerm) {
+      if (outputTerm == null) {
+        outputTerm = 0;
+      }
+      if (outputTerm < this.content.length) {
+        return this.content[outputTerm].push(["command", content, options]);
+      }
     };
 
-    ShowYourTerms.prototype.addLine = function(content, options) {
-      return this.content[0].push(["line", content, options]);
+    ShowYourTerms.prototype.addLine = function(content, options, outputTerm) {
+      if (outputTerm == null) {
+        outputTerm = 0;
+      }
+      if (outputTerm < this.content.length) {
+        return this.content[outputTerm].push(["line", content, options]);
+      }
     };
 
     ShowYourTerms.prototype.play = function(outputTerm) {

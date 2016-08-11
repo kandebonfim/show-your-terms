@@ -34,11 +34,13 @@ class @ShowYourTerms
         @togglePause outputTerm
       ))
 
-  addCommand: (content, options) ->
-    @content[0].push ["command", content, options]
+  addCommand: (content, options, outputTerm=0) ->
+    if outputTerm < @content.length
+      @content[outputTerm].push ["command", content, options]
 
-  addLine: (content, options) ->
-    @content[0].push ["line", content, options]
+  addLine: (content, options, outputTerm=0) ->
+    if outputTerm < @content.length
+      @content[outputTerm].push ["line", content, options]
 
   play: (outputTerm=0) ->
     if @sstatus[outputTerm] == "ready"
