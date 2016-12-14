@@ -51,6 +51,9 @@ class @ShowYourTerms
     for element in @container[outputTerm].children
       @content[outputTerm].push [element.getAttribute('data-action'), element.innerText, {styles: element.classList, delay: element.getAttribute('data-delay'), speed: element.getAttribute('data-speed')}]
     @container[outputTerm].style.minHeight = window.getComputedStyle(@container[outputTerm], null).getPropertyValue "height"
+    if @termOptions[outputTerm].statusbar
+      @container[outputTerm].style.minHeight=parseInt(@container[outputTerm].style.minHeight) + 26 + "px"
+      
     if @termOptions[outputTerm].animate
       @play(outputTerm)
     else

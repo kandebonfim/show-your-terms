@@ -67,6 +67,9 @@
         ]);
       }
       this.container[outputTerm].style.minHeight = window.getComputedStyle(this.container[outputTerm], null).getPropertyValue("height");
+      if (this.termOptions[outputTerm].statusbar) {
+        this.container[outputTerm].style.minHeight = parseInt(this.container[outputTerm].style.minHeight) + 26 + "px";
+      }
       if (this.termOptions[outputTerm].animate) {
         return this.play(outputTerm);
       } else {
