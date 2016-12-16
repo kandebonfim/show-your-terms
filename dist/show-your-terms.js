@@ -253,6 +253,9 @@
       for (j = 0, len = ref.length; j < len; j++) {
         el = ref[j];
         type = el[0], content = el[1], options = el[2];
+        if (!content.length) {
+          continue;
+        }
         currentLine = document.createElement("div");
         currentLine.setAttribute('data-line', count++);
         if (options.styles) {
@@ -342,20 +345,24 @@
           currentLine.classList.add('command');
         }
         counter = 0;
-        return this.dynamic[outputTerm].timers.command = setInterval(((function(_this) {
-          return function() {
-            if (_this.isPlaying(outputTerm)) {
-              currentLine.appendChild(document.createTextNode(content[counter]));
-              _this.container[outputTerm].appendChild(currentLine);
-              counter++;
-              if (counter === content.length) {
-                currentLine.classList.remove('active');
-                _this.callNextOutput(options.delay, outputTerm);
-                return clearInterval(_this.dynamic[outputTerm].timers.command);
+        if (content.length > 0) {
+          return this.dynamic[outputTerm].timers.command = setInterval(((function(_this) {
+            return function() {
+              if (_this.isPlaying(outputTerm)) {
+                currentLine.appendChild(document.createTextNode(content[counter]));
+                _this.container[outputTerm].appendChild(currentLine);
+                counter++;
+                if (counter === content.length) {
+                  currentLine.classList.remove('active');
+                  _this.callNextOutput(options.delay, outputTerm);
+                  return clearInterval(_this.dynamic[outputTerm].timers.command);
+                }
               }
-            }
-          };
-        })(this)), speed);
+            };
+          })(this)), speed);
+        } else {
+          return this.callNextOutput(options.delay, outputTerm);
+        }
       } else {
         if (!this.isPlaying(outputTerm)) {
           return this.dynamic[outputTerm].timers.pause = setInterval(((function(_this) {

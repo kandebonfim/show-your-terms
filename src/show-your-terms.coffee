@@ -176,6 +176,8 @@ class @ShowYourTerms
     count=0
     for el in @content[outputTerm]
       [type, content, options] = el;
+      unless content.length 
+        continue
       currentLine = document.createElement "div"
       currentLine.setAttribute('data-line', count++)
       if options.styles then currentLine.setAttribute "class", options.styles
@@ -231,16 +233,20 @@ class @ShowYourTerms
       if not currentLine.classList.contains 'type'
         currentLine.classList.add 'command'
       counter = 0
-      @dynamic[outputTerm].timers.command = setInterval ( =>
-        if @isPlaying outputTerm
-          currentLine.appendChild document.createTextNode(content[counter])
-          @container[outputTerm].appendChild currentLine
-          counter++
-          if counter == content.length
-            currentLine.classList.remove 'active'
-            @callNextOutput options.delay,outputTerm
-            clearInterval @dynamic[outputTerm].timers.command
-      ), speed
+      if content.length > 0
+        @dynamic[outputTerm].timers.command = setInterval ( =>
+          if @isPlaying outputTerm
+            currentLine.appendChild document.createTextNode(content[counter])
+            @container[outputTerm].appendChild currentLine
+            counter++
+            if counter == content.length
+              currentLine.classList.remove 'active'
+              @callNextOutput options.delay,outputTerm
+              clearInterval @dynamic[outputTerm].timers.command
+        ), speed
+      else
+        @callNextOutput options.delay,outputTerm
+
     else
       if not @isPlaying outputTerm
         @dynamic[outputTerm].timers.pause = setInterval ( =>
