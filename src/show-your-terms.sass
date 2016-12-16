@@ -1,5 +1,6 @@
 $term-color-header: #E1DFE1
 $term-color-background: rgba(#1D1F20, .95)
+$term-color-highlight: rgba(#1D1F20, .98)
 
 $term-color-red: #EB5E56
 $term-color-yellow: #F7BF33
@@ -10,28 +11,72 @@ $term-color-grey: rgba(white, .6)
 $term-th-dark: darken(white, 70deg)
 $term-th-light: rgba(white, .95)
 
+$term-th-hbg-ubuntu: rgba(66, 65, 61, 1)
+$term-th-hfg-ubuntu: rgba(white, .99)
+$term-th-bg-ubuntu: rgba(48, 10, 36, .95)
+$term-th-fg-ubuntu: rgba(white, .99)
+$term-th-icons-ubuntu: url("img/ubuntu-icons.png")
+
+$term-th-hbg-blue: #96a5bc
+$term-th-hfg-blue: rgba(15,15,15,0.95)
+
 $term-header-height: 26px
 $term-header-buttons-size: $term-header-height * .4
 $term-header-buttons-distance: 6px
 
 $term-border-radius: 6px
 
+$term-default-padding: 14px
+
 .showyourterms
   position: relative
   background-color: $term-color-background
-  padding: 14px
+  padding: $term-default-padding 0
   color: white
   margin-top: $term-header-height + 10px
   border-radius: 0 0 $term-border-radius $term-border-radius
-
+  margin-bottom: 26px
   font-family: "Roboto Mono", monospace
   font-size: 14px
+  
+  & div:last-child
+    margin-bottom: 1px
+    
+  >.syt-statusbar
+    height: 26px
+    background-color: $term-color-header
+    position: absolute
+    content: ''
+    /* top: 100%
+    bottom: -1px
+    width: 100%
+    margin-top: 0
+    /* margin-top: -$term-border-radius / 2
+    margin-bottom: 0
+    border-radius: 0 0 $term-border-radius $term-border-radius
+    font-size: 12px
+    
+    >.status
+      color: black
 
+    >.tools
+      list-style: none outside none
+      padding: 0.5em
+      margin: 0
+      margin-right: 1em
+      position: absolute
+      right: 0
+
+      li
+        display: inline-block
+        margin-left: 1em
+        color: black
+    
   &:before,
   &:after
     content: ''
     position: absolute
-
+									
   // Bar
   &:before
     width: 100%
@@ -54,14 +99,75 @@ $term-border-radius: 6px
     box-shadow: ($term-header-buttons-size+$term-header-buttons-distance) 0 0 0 $term-color-yellow, ($term-header-buttons-size+$term-header-buttons-distance)*2 0 0 0 $term-color-green
 
   // Themes
+    
+  // Ubuntu theme
+  &.ubuntu:before
+    background-color: $term-th-hbg-ubuntu
+    color: $term-th-hfg-ubuntu
+  &.ubuntu:after
+    width: 54px
+    height: 19px
+    top: -20px
+    left: $term-header-buttons-size * .8
+    border-radius: 0
+    background: $term-th-icons-ubuntu
+    box-shadow: none
+    
+  &.ubuntu
+    background-color: $term-th-bg-ubuntu
+    color: $term-th-fg-ubuntu
+  &.ubuntu>.syt-statusbar
+    background-color: $term-th-hbg-ubuntu
+    color: $term-th-hfg-ubuntu
+
+    >.status
+      color: black
+
+    >.tools
+      li
+        display: inline-block
+        margin-left: 1em
+        color: $term-th-hfg-ubuntu
+
+  // Dark theme
   &.dark:before
     background-color: $term-th-dark
     color: $term-th-light
 
+  &.dark>.syt-statusbar
+    background-color: $term-th-dark
+    color: $term-th-light
+
+    >.status
+      color: black
+
+    >.tools
+      li
+        display: inline-block
+        margin-left: 1em
+        color: $term-th-light
+
+  // Light theme
   &.light
     background-color: $term-th-light
     color: $term-th-dark
 
+  // Blue theme
+  &.blue:before
+    background-color: $term-th-hbg-blue
+    color: $term-th-hfg-blue
+
+  &.blue:after
+    background-color: #565eeb
+    border-radius: 0%
+    box-shadow: none
+    right: 8.32px
+    left: inherit
+    
+  &.blue>.syt-statusbar
+    background-color: $term-th-hbg-blue
+    color: $term-th-hfg-blue
+    
   // Window name
   &[data-title]:before
     content: attr(data-title)
@@ -104,6 +210,13 @@ $term-border-radius: 6px
   .blink,.command.active:after,.type.active:after
     animation: syt_b 1s linear infinite
 
+  .type, .line, .command
+    margin-left: $term-default-padding
+    margin-right: $term-default-padding
+
+  .type, .command
+    word-break: break-all
+  
 @keyframes syt_b
   0%,50%
     opacity: 0
